@@ -52,43 +52,77 @@ const restaurant = {
   },
 };
 
+// Use ANY data type, return ANY data type, short-circuiting
+// OR operator short-circuits when the first operand is truth.
+console.log(3 || 'Jonas');
+console.log('' || 'Jonas');
+console.log(true || 0);
+console.log(undefined || null);
+
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+restaurant.numGuests = 0;
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+
+const guests2 = restaurant.numGuests || 10;
+console.log(guests2);
+
+console.log('---- AND ----');
+console.log(0 && 'Jonas');
+console.log(7 && 'Jonas');
+
+// Hello is a truthy value, 23 is a truthy value, null is a falsy value, then result is false.
+console.log('Hello' && 23 && null && 'Jonas');
+
+// Practical example
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushrooms', 'spinach');
+}
+
+restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+// the AND operator will return the first falsy value
+// or the last value if all of them are truthy.
+// So the OR operator will return the first truthy value of all the operands,
+// or simply the last value if all of them are falsy.
+
 //////////// REST OPERATOR ////////////
 // Rest operator is used to collect the remaining arguments into an array
 
-// SPREAD, because on RIGHT side of =
-const arr = [1, 2, ...[3, 4]];
-// REST, becuase on LEFT side of =
-const [a, b, ...others] = [1, 2, 3, 4, 5];
-console.log(a, b, others);
+// // SPREAD, because on RIGHT side of =
+// const arr = [1, 2, ...[3, 4]];
+// // REST, becuase on LEFT side of =
+// const [a, b, ...others] = [1, 2, 3, 4, 5];
+// console.log(a, b, others);
 
-const [pizza, , risotto, ...otherFood] = [
-  ...restaurant.mainMenu,
-  ...restaurant.starterMenu,
-];
-console.log(pizza, risotto, otherFood);
+// const [pizza, , risotto, ...otherFood] = [
+//   ...restaurant.mainMenu,
+//   ...restaurant.starterMenu,
+// ];
+// console.log(pizza, risotto, otherFood);
 
-// Objects
-const { sat, ...weekdays } = restaurant.openingHours;
-console.log(sat, weekdays);
+// // Objects
+// const { sat, ...weekdays } = restaurant.openingHours;
+// console.log(sat, weekdays);
 
-// Functions
-// Packaging arguments into an array
-const add = function (...numbers) {
-  let sum = 0;
-  for (let i = 0; i < numbers.length; i++) {
-    sum += numbers[i];
-  }
-  console.log(sum);
-};
-add(2, 3);
-add(5, 3, 7, 2);
-add(8, 2, 5, 3, 2, 1, 4);
+// // Functions
+// // Packaging arguments into an array
+// const add = function (...numbers) {
+//   let sum = 0;
+//   for (let i = 0; i < numbers.length; i++) {
+//     sum += numbers[i];
+//   }
+//   console.log(sum);
+// };
+// add(2, 3);
+// add(5, 3, 7, 2);
+// add(8, 2, 5, 3, 2, 1, 4);
 
-const x = [23, 5, 7];
-add(...x);
+// const x = [23, 5, 7];
+// add(...x);
 
-restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
-restaurant.orderPasta('mushrooms');
+// restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+// restaurant.orderPasta('mushrooms');
 
 //////////// SPREAD OPERATOR ////////////
 // Spread operator is to pack an array.
