@@ -52,35 +52,47 @@ const restaurant = {
   },
 };
 
+//////////// NULLISH COALESCING OPERATOR ////////////
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+// Since 0 is a falsy value, the value of numGuests will be used instead
+console.log(guests);
+
+// Fixed:
+// Nullish: null and undefined (NOT 0 or '')
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect);
+
+//////////// SHORT CIRCUITING ////////////
 // Use ANY data type, return ANY data type, short-circuiting
 // OR operator short-circuits when the first operand is truth.
-console.log(3 || 'Jonas');
-console.log('' || 'Jonas');
-console.log(true || 0);
-console.log(undefined || null);
+// console.log(3 || 'Jonas');
+// console.log('' || 'Jonas');
+// console.log(true || 0);
+// console.log(undefined || null);
 
-console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+// console.log(undefined || 0 || '' || 'Hello' || 23 || null);
 
-restaurant.numGuests = 0;
-const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
-console.log(guests1);
+// restaurant.numGuests = 0;
+// const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+// console.log(guests1);
 
-const guests2 = restaurant.numGuests || 10;
-console.log(guests2);
+// const guests2 = restaurant.numGuests || 10;
+// console.log(guests2);
 
-console.log('---- AND ----');
-console.log(0 && 'Jonas');
-console.log(7 && 'Jonas');
+// console.log('---- AND ----');
+// console.log(0 && 'Jonas');
+// console.log(7 && 'Jonas');
 
-// Hello is a truthy value, 23 is a truthy value, null is a falsy value, then result is false.
-console.log('Hello' && 23 && null && 'Jonas');
+// // Hello is a truthy value, 23 is a truthy value, null is a falsy value, then result is false.
+// console.log('Hello' && 23 && null && 'Jonas');
 
-// Practical example
-if (restaurant.orderPizza) {
-  restaurant.orderPizza('mushrooms', 'spinach');
-}
+// // Practical example
+// if (restaurant.orderPizza) {
+//   restaurant.orderPizza('mushrooms', 'spinach');
+// }
 
-restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
+// restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach');
 // the AND operator will return the first falsy value
 // or the last value if all of them are truthy.
 // So the OR operator will return the first truthy value of all the operands,
