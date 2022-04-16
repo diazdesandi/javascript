@@ -52,16 +52,49 @@ const restaurant = {
   },
 };
 
-//////////// NULLISH COALESCING OPERATOR ////////////
-restaurant.numGuests = 0;
-const guests = restaurant.numGuests || 10;
-// Since 0 is a falsy value, the value of numGuests will be used instead
-console.log(guests);
+const rest1 = {
+  name: 'Capri',
+  // numGuests: 20,
+  numGuests: 0,
+};
 
-// Fixed:
-// Nullish: null and undefined (NOT 0 or '')
-const guestCorrect = restaurant.numGuests ?? 10;
-console.log(guestCorrect);
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+};
+
+// OR assigment operator
+// the logical OR assignment operator will assign a value to a variable
+// if that exact variable is falsy right now.
+// rest1.numGuests = rest1.numGuests || 10;
+// rest2.numGuests = rest2.numGuests || 10;
+
+// rest1.numGuests ||= 10; // same as above, don't really work
+// rest2.numGuests ||= 10;
+
+// This one works with nullish asignment operator (null or undefined)
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+// AND assignment operator
+// rest1.owner = rest1.owner && '<ANONYMUS>'; // Undefined because property doesn't exist
+// rest2.owner = rest2.owner && '<ANONYMUS>';
+rest1.owner &&= '<ANONYMUS>';
+rest2.owner &&= '<ANONYMUS>';
+
+console.log(rest1);
+console.log(rest2);
+
+// //////////// NULLISH COALESCING OPERATOR ////////////
+// restaurant.numGuests = 0;
+// const guests = restaurant.numGuests || 10;
+// // Since 0 is a falsy value, the value of numGuests will be used instead
+// console.log(guests);
+
+// // Fixed:
+// // Nullish: null and undefined (NOT 0 or '')
+// const guestCorrect = restaurant.numGuests ?? 10;
+// console.log(guestCorrect);
 
 //////////// SHORT CIRCUITING ////////////
 // Use ANY data type, return ANY data type, short-circuiting
