@@ -108,50 +108,90 @@ const game = {
   },
 };
 
-const players1 = game.players[0];
-const players2 = game.players[1];
-console.log(players1);
-console.log(players2);
+// 1.
+// Old code
+// const players1 = game.players[0];
+// const players2 = game.players[1];
+// console.log(players1);
+// console.log(players2);
 
-const gk = players1[0];
-const fieldPlayers = players1.slice(1);
-console.log(gk);
-console.log(fieldPlayers);
+// New code
+const [players1, players2] = game.players;
+console.log(players1, players2);
 
-const allPlayers = players1.concat(players2);
+// 2.
+// Old code
+// const gk = players1[0];
+// const fieldPlayers = players1.slice(1);
+// console.log(gk);
+// console.log(fieldPlayers);
+
+// New code
+const [gk, ...fieldPlayers] = players1;
+console.log(gk, fieldPlayers);
+
+// 3.
+// Old code
+// const allPlayers = players1.concat(players2);
+// console.log(allPlayers);
+
+// New code
+const allPlayers = [...players1, ...players2];
 console.log(allPlayers);
 
-const players1Final = players1.concat(['Thiago', 'Coutinho', 'Perisic']);
-console.log(players1Final);
+// 4.
+// Old code
+// const players1Final = players1.concat(['Thiago', 'Coutinho', 'Perisic']);
 
-const team1 = game.odds.team1;
-const draw = game.odds.x;
-const team2 = game.odds.team2;
-console.log(team1, draw, team2);
+// New code
+const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
 
-const scoredGoals = game.scored;
-let totalScore = 0;
+// 5.
+// Old code
+// const team1 = game.odds.team1;
+// const draw = game.odds.x;
+// const team2 = game.odds.team2;
+// console.log(team1, draw, team2);
 
-const printGoals = function (playerScored) {
-  for (let i = 0; i < playerScored.length; i++) {
-    console.log(`${playerScored[i]} scored a goal!`);
-    totalScore += 1;
-  }
-  console.log(`Total goals scored: ${totalScore}`);
+// New code
+const {
+  odds: { team1, x, team2 },
+} = game;
+console.log(team1, x, team2);
+
+// 6.
+// Old code
+// const scoredGoals = game.scored;
+// let totalScore = 0;
+// const printGoals = function (playerScored) {
+//   for (let i = 0; i < playerScored.length; i++) {
+//     console.log(`${playerScored[i]} scored a goal!`);
+//     totalScore += 1;
+//   }
+//   console.log(`Total goals scored: ${totalScore}`);
+// };
+// printGoals(scoredGoals);
+
+// New code
+const printGoals = function (...players) {
+  console.log(players);
+  console.log(`Total goals scored: ${players.length}`);
 };
 
-printGoals(scoredGoals);
+printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
 
-const team1Odds = game.odds.team1;
-const team2Odds = game.odds.team2;
+printGoals(...game.scored); // Spread operator, since we're passing in an array
 
-const result = team1Odds || team2Odds;
+// 7.
+// Old code
+// const team1Odds = game.odds.team1;
+// const team2Odds = game.odds.team2;
+// const result = team1Odds || team2Odds;
+// console.log(result);
 
-console.log(result);
-
-const testData6 = ['Davies', 'Muller', 'Lewandowski', 'Kimmich'];
-
-printGoals(testData6);
+// New code
+team1 < team2 && console.log('Team 1 is more likely to win');
+team1 > team2 && console.log('Team 2 is more likely to win');
 
 // const rest1 = {
 //   name: 'Capri',
