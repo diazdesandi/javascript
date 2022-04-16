@@ -4,6 +4,22 @@
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
+const weekdays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const openingHours = {
+  [weekdays[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [weekdays[5]]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
 // Data needed for first part of the section
 const restaurant = {
   name: 'Classico Italiano',
@@ -12,45 +28,41 @@ const restaurant = {
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
 
-  order: function (starterIndex, mainIndex) {
+  // ES6 enhanced object literal syntax
+  openingHours,
+
+  order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
 
-  orderDelivery: function ({
-    starterIndex = 1,
-    mainIndex = 0,
-    time = '20:00',
-    address,
-  }) {
+  orderDelivery({ starterIndex = 1, mainIndex = 0, time = '20:00', address }) {
     console.log(
       `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
     );
   },
 
-  orderPasta: function (ing1, ing2, ing3) {
+  orderPasta(ing1, ing2, ing3) {
     console.log(`Here is your pasta: ${ing1}, ${ing2}, ${ing3}`);
   },
 
-  orderPizza: function (mainIngredient, ...otherIngredients) {
+  orderPizza(mainIngredient, ...otherIngredients) {
     console.log(mainIngredient);
     console.log(otherIngredients);
   },
-
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
 };
+
+/////////// Looping Arrays: The for-of Loop ///////////
+
+/////////// Looping Arrays: The for-of Loop ///////////
+// const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+
+// for (const item of menu) {
+//   console.log(item);
+// }
+
+// for (const [i, el] of menu.entries()) {
+//   console.log(`${i + 1}: ${el}`);
+// }
 
 ///////////////////////////////////////
 // Coding Challenge #1
@@ -67,131 +79,131 @@ Suppose we get data from a web service about a certain game (below). In this cha
 TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Then, call the function again with players from game.scored
 */
 
-const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
-    ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
-    ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
-};
+// const game = {
+//   team1: 'Bayern Munich',
+//   team2: 'Borrussia Dortmund',
+//   players: [
+//     [
+//       'Neuer',
+//       'Pavard',
+//       'Martinez',
+//       'Alaba',
+//       'Davies',
+//       'Kimmich',
+//       'Goretzka',
+//       'Coman',
+//       'Muller',
+//       'Gnarby',
+//       'Lewandowski',
+//     ],
+//     [
+//       'Burki',
+//       'Schulz',
+//       'Hummels',
+//       'Akanji',
+//       'Hakimi',
+//       'Weigl',
+//       'Witsel',
+//       'Hazard',
+//       'Brandt',
+//       'Sancho',
+//       'Gotze',
+//     ],
+//   ],
+//   score: '4:0',
+//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+//   date: 'Nov 9th, 2037',
+//   odds: {
+//     team1: 1.33,
+//     x: 3.25,
+//     team2: 6.5,
+//   },
+// };
 
-// 1.
-// Old code
-// const players1 = game.players[0];
-// const players2 = game.players[1];
-// console.log(players1);
-// console.log(players2);
+// // 1.
+// // Old code
+// // const players1 = game.players[0];
+// // const players2 = game.players[1];
+// // console.log(players1);
+// // console.log(players2);
 
-// New code
-const [players1, players2] = game.players;
-console.log(players1, players2);
+// // New code
+// const [players1, players2] = game.players;
+// console.log(players1, players2);
 
-// 2.
-// Old code
-// const gk = players1[0];
-// const fieldPlayers = players1.slice(1);
-// console.log(gk);
-// console.log(fieldPlayers);
+// // 2.
+// // Old code
+// // const gk = players1[0];
+// // const fieldPlayers = players1.slice(1);
+// // console.log(gk);
+// // console.log(fieldPlayers);
 
-// New code
-const [gk, ...fieldPlayers] = players1;
-console.log(gk, fieldPlayers);
+// // New code
+// const [gk, ...fieldPlayers] = players1;
+// console.log(gk, fieldPlayers);
 
-// 3.
-// Old code
-// const allPlayers = players1.concat(players2);
+// // 3.
+// // Old code
+// // const allPlayers = players1.concat(players2);
+// // console.log(allPlayers);
+
+// // New code
+// const allPlayers = [...players1, ...players2];
 // console.log(allPlayers);
 
-// New code
-const allPlayers = [...players1, ...players2];
-console.log(allPlayers);
+// // 4.
+// // Old code
+// // const players1Final = players1.concat(['Thiago', 'Coutinho', 'Perisic']);
 
-// 4.
-// Old code
-// const players1Final = players1.concat(['Thiago', 'Coutinho', 'Perisic']);
+// // New code
+// const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
 
-// New code
-const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+// // 5.
+// // Old code
+// // const team1 = game.odds.team1;
+// // const draw = game.odds.x;
+// // const team2 = game.odds.team2;
+// // console.log(team1, draw, team2);
 
-// 5.
-// Old code
-// const team1 = game.odds.team1;
-// const draw = game.odds.x;
-// const team2 = game.odds.team2;
-// console.log(team1, draw, team2);
+// // New code
+// const {
+//   odds: { team1, x, team2 },
+// } = game;
+// console.log(team1, x, team2);
 
-// New code
-const {
-  odds: { team1, x, team2 },
-} = game;
-console.log(team1, x, team2);
+// // 6.
+// // Old code
+// // const scoredGoals = game.scored;
+// // let totalScore = 0;
+// // const printGoals = function (playerScored) {
+// //   for (let i = 0; i < playerScored.length; i++) {
+// //     console.log(`${playerScored[i]} scored a goal!`);
+// //     totalScore += 1;
+// //   }
+// //   console.log(`Total goals scored: ${totalScore}`);
+// // };
+// // printGoals(scoredGoals);
 
-// 6.
-// Old code
-// const scoredGoals = game.scored;
-// let totalScore = 0;
-// const printGoals = function (playerScored) {
-//   for (let i = 0; i < playerScored.length; i++) {
-//     console.log(`${playerScored[i]} scored a goal!`);
-//     totalScore += 1;
-//   }
-//   console.log(`Total goals scored: ${totalScore}`);
+// // New code
+// const printGoals = function (...players) {
+//   console.log(players);
+//   console.log(`Total goals scored: ${players.length}`);
 // };
-// printGoals(scoredGoals);
 
-// New code
-const printGoals = function (...players) {
-  console.log(players);
-  console.log(`Total goals scored: ${players.length}`);
-};
+// printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
 
-printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
+// printGoals(...game.scored); // Spread operator, since we're passing in an array
 
-printGoals(...game.scored); // Spread operator, since we're passing in an array
+// // 7.
+// // Old code
+// // const team1Odds = game.odds.team1;
+// // const team2Odds = game.odds.team2;
+// // const result = team1Odds || team2Odds;
+// // console.log(result);
 
-// 7.
-// Old code
-// const team1Odds = game.odds.team1;
-// const team2Odds = game.odds.team2;
-// const result = team1Odds || team2Odds;
-// console.log(result);
-
-// New code
-team1 < team2 && console.log('Team 1 is more likely to win');
-team1 > team2 && console.log('Team 2 is more likely to win');
+// // New code
+// team1 < team2 && console.log('Team 1 is more likely to win');
+// team1 > team2 && console.log('Team 2 is more likely to win');
 
 // const rest1 = {
 //   name: 'Capri',
