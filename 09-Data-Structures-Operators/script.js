@@ -52,38 +52,139 @@ const restaurant = {
   },
 };
 
-const rest1 = {
-  name: 'Capri',
-  // numGuests: 20,
-  numGuests: 0,
+///////////////////////////////////////
+// Coding Challenge #1
+
+/* 
+Suppose we get data from a web service about a certain game (below). In this challenge we're gonna work with the data. So here are your tasks:
+1. Create one player array for each team (variables 'players1' and 'players2')
+2. The first player in any player array is the goalkeeper and the others are field players. For Bayern Munich (team 1) create one variable ('gk') with the goalkeeper's name, and one array ('fieldPlayers') with all the remaining 10 field players
+3. Create an array 'allPlayers' containing all players of both teams (22 players)
+4. During the game, Bayern Munich (team 1) used 3 substitute players. So create a new array ('players1Final') containing all the original team1 players plus 'Thiago', 'Coutinho' and 'Perisic'
+5. Based on the game.odds object, create one variable for each odd (called 'team1', 'draw' and 'team2')
+6. Write a function ('printGoals') that receives an arbitrary number of player names (NOT an array) and prints each of them to the console, along with the number of goals that were scored in total (number of player names passed in)
+7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win, WITHOUT using an if/else statement or the ternary operator.
+TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Then, call the function again with players from game.scored
+*/
+
+const game = {
+  team1: 'Bayern Munich',
+  team2: 'Borrussia Dortmund',
+  players: [
+    [
+      'Neuer',
+      'Pavard',
+      'Martinez',
+      'Alaba',
+      'Davies',
+      'Kimmich',
+      'Goretzka',
+      'Coman',
+      'Muller',
+      'Gnarby',
+      'Lewandowski',
+    ],
+    [
+      'Burki',
+      'Schulz',
+      'Hummels',
+      'Akanji',
+      'Hakimi',
+      'Weigl',
+      'Witsel',
+      'Hazard',
+      'Brandt',
+      'Sancho',
+      'Gotze',
+    ],
+  ],
+  score: '4:0',
+  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+  date: 'Nov 9th, 2037',
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
 };
 
-const rest2 = {
-  name: 'La Piazza',
-  owner: 'Giovanni Rossi',
+const players1 = game.players[0];
+const players2 = game.players[1];
+console.log(players1);
+console.log(players2);
+
+const gk = players1[0];
+const fieldPlayers = players1.slice(1);
+console.log(gk);
+console.log(fieldPlayers);
+
+const allPlayers = players1.concat(players2);
+console.log(allPlayers);
+
+const players1Final = players1.concat(['Thiago', 'Coutinho', 'Perisic']);
+console.log(players1Final);
+
+const team1 = game.odds.team1;
+const draw = game.odds.x;
+const team2 = game.odds.team2;
+console.log(team1, draw, team2);
+
+const scoredGoals = game.scored;
+let totalScore = 0;
+
+const printGoals = function (playerScored) {
+  for (let i = 0; i < playerScored.length; i++) {
+    console.log(`${playerScored[i]} scored a goal!`);
+    totalScore += 1;
+  }
+  console.log(`Total goals scored: ${totalScore}`);
 };
 
-// OR assigment operator
-// the logical OR assignment operator will assign a value to a variable
-// if that exact variable is falsy right now.
-// rest1.numGuests = rest1.numGuests || 10;
-// rest2.numGuests = rest2.numGuests || 10;
+printGoals(scoredGoals);
 
-// rest1.numGuests ||= 10; // same as above, don't really work
-// rest2.numGuests ||= 10;
+const team1Odds = game.odds.team1;
+const team2Odds = game.odds.team2;
 
-// This one works with nullish asignment operator (null or undefined)
-rest1.numGuests ??= 10;
-rest2.numGuests ??= 10;
+const result = team1Odds || team2Odds;
 
-// AND assignment operator
-// rest1.owner = rest1.owner && '<ANONYMUS>'; // Undefined because property doesn't exist
-// rest2.owner = rest2.owner && '<ANONYMUS>';
-rest1.owner &&= '<ANONYMUS>';
-rest2.owner &&= '<ANONYMUS>';
+console.log(result);
 
-console.log(rest1);
-console.log(rest2);
+const testData6 = ['Davies', 'Muller', 'Lewandowski', 'Kimmich'];
+
+printGoals(testData6);
+
+// const rest1 = {
+//   name: 'Capri',
+//   // numGuests: 20,
+//   numGuests: 0,
+// };
+
+// const rest2 = {
+//   name: 'La Piazza',
+//   owner: 'Giovanni Rossi',
+// };
+
+// // OR assigment operator
+// // the logical OR assignment operator will assign a value to a variable
+// // if that exact variable is falsy right now.
+// // rest1.numGuests = rest1.numGuests || 10;
+// // rest2.numGuests = rest2.numGuests || 10;
+
+// // rest1.numGuests ||= 10; // same as above, don't really work
+// // rest2.numGuests ||= 10;
+
+// // This one works with nullish asignment operator (null or undefined)
+// rest1.numGuests ??= 10;
+// rest2.numGuests ??= 10;
+
+// // AND assignment operator
+// // rest1.owner = rest1.owner && '<ANONYMUS>'; // Undefined because property doesn't exist
+// // rest2.owner = rest2.owner && '<ANONYMUS>';
+// rest1.owner &&= '<ANONYMUS>';
+// rest2.owner &&= '<ANONYMUS>';
+
+// console.log(rest1);
+// console.log(rest2);
 
 // //////////// NULLISH COALESCING OPERATOR ////////////
 // restaurant.numGuests = 0;
