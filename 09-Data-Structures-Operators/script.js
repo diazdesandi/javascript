@@ -113,33 +113,59 @@ const game = {
 };
 
 // 1.
-for (let i = 0; i < game.scored.length; i++) {
-  console.log(`Goal ${i + 1}: ${game.scored[i]}`);
+// for (let i = 0; i < game.scored.length; i++) {
+//   console.log(`Goal ${i + 1}: ${game.scored[i]}`);
+// }
+// Fixed code
+for (const [i, player] of game.scored.entries()) {
+  console.log(`Goal ${i + 1}: ${player}`);
 }
 
 // 2.
-const scores = game.scored.map((player) => player.length);
-const average = scores.reduce((acc, curr) => acc + curr) / scores.length;
+// const scores = game.scored.map((player) => player.length);
+// const average = scores.reduce((acc, curr) => acc + curr) / scores.length;
+
+// Fixed code
+const odds = Object.values(game.odds);
+let average = 0;
+for (const odd of odds) {
+  average += odd;
+}
+average /= odds.length;
+console.log(average);
 
 // 3. Couldn't figure out how to do this one, but I think it's pretty simple. Need to print names instead of "undefined".
-const odds = Object.values(game.odds);
-Object.entries(game.odds).forEach((value) => {
-  console.log(`Odd of victory ${game.team1}: ${value}`);
-});
+// const odds = Object.values(game.odds);
+// Object.entries(game.odds).forEach((value) => {
+//   console.log(`Odd of victory ${game.team1}: ${value}`);
+// });
+
+// Fixed code
+for (const [team, odd] of Object.entries(game.odds)) {
+  const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
+  console.log(`Odd of victory ${teamStr}: ${odd}`);
+}
 
 // 4. Bonus
-const scorers = {
-  [game.scored[0]]: 1,
-  [game.scored[1]]: 1,
-  [game.scored[2]]: 2,
-  [game.scored[3]]: 1,
-};
-const properties = Object.keys(scorers);
-let openStr = `The following players scored in ${game.team1} and ${game.team2}: `;
-for (const property of properties) {
-  openStr += `${property} (${scorers[property]}), \n`;
+// const scorers = {
+//   [game.scored[0]]: 1,
+//   [game.scored[1]]: 1,
+//   [game.scored[2]]: 2,
+//   [game.scored[3]]: 1,
+// };
+// const properties = Object.keys(scorers);
+// let openStr = `The following players scored in ${game.team1} and ${game.team2}: `;
+// for (const property of properties) {
+//   openStr += `${property} (${scorers[property]}), \n`;
+// }
+// console.log(openStr);
+
+// Fixed code
+const scorers = {};
+for (const player of game.scored) {
+  scorers[player] ? scorers[player]++ : (scorers[player] = 1);
 }
-console.log(openStr);
+console.log(scorers);
 
 /////////// Looping Objects: Object Keys, Values, and Entries ///////////
 // const properties = Object.keys(openingHours);
