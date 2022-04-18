@@ -51,7 +51,41 @@ const restaurant = {
   },
 };
 
-/////////////////// MAPS ///////////////////
+///////////////////////// MAPS ITERATION ////////////////////////////////
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct!'],
+  [false, 'Try again!'],
+]);
+console.log(question);
+
+// Convert objects to mpas
+console.log(Object.entries(openingHours));
+const hoursMap = new Map(Object.entries(openingHours)); // Converted to iterable
+console.log(hoursMap);
+
+// Quiz app
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+const answer = +prompt('Your answer:');
+console.log(answer);
+console.log(question.get(answer === question.get('correct')));
+
+// Conver map to array
+console.log(...question);
+// console.log(question.entries());
+console.log(question.keys());
+console.log(question.values());
+
+/////////////////// Maps fundamentals ///////////////////
 /* 
   A map is a data structure that we can use to map values to keys.
   So, just like an object, data is stored in key value pairs in maps.
@@ -60,33 +94,34 @@ const restaurant = {
   It could even be objects, or arrays, or other maps.
 */
 
-const rest = new Map();
-rest.set('name', 'Classico Italiano');
-rest.set(1, 'Firenze, Italy');
-console.log(rest.set(2, 'Lisbon, Portugal'));
+// const rest = new Map();
+// rest.set('name', 'Classico Italiano');
+// rest.set(1, 'Firenze, Italy');
+// console.log(rest.set(2, 'Lisbon, Portugal'));
 
-rest
-  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
-  .set('open', 11)
-  .set('close', 23)
-  .set(true, 'We are open!')
-  .set(false, 'We are closed!');
+// rest
+//   .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+//   .set('open', 11)
+//   .set('close', 23)
+//   .set(true, 'We are open!')
+//   .set(false, 'We are closed!');
 
-console.log(rest.get('name'));
-console.log(rest.get(true));
-console.log(rest.get(1));
+// console.log(rest.get('name'));
+// console.log(rest.get(true));
+// console.log(rest.get(1));
 
-const time = 8;
-console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+// const time = 8;
+// console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
 
-console.log(rest.has('categories'));
-rest.delete(2);
-rest.set([1, 2], 'Test');
-rest.set(document.querySelector('h1'), 'Heading');
-console.log(rest);
-console.log(rest.size);
+// console.log(rest.has('categories'));
+// rest.delete(2);
+// rest.set([1, 2], 'Test');
+// rest.set(document.querySelector('h1'), 'Heading');
+// console.log(rest);
+// console.log(rest.size);
 
-console.log(rest.get([1, 2])); // Not the same object as the one in the map
+// console.log(rest.get([1, 2])); // Not the same object as the one in the map
+
 /////////////////// SETS ///////////////////
 // A set is basically just a collection of unique values.
 // So that means that a set can never have any duplicates.
