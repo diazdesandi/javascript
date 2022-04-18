@@ -51,6 +51,50 @@ const restaurant = {
   },
 };
 
+///////////////// Working with strings Part 1 //////////////////
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log('B737'[0]);
+
+console.log(airline.length);
+console.log('B737'.length);
+
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+console.log(airline.indexOf('Portugal'));
+
+console.log(airline.slice(4)); // Portion at where the extraction starts // Substring
+
+console.log(airline.slice(0, airline.indexOf(' '))); // 'TAP'
+console.log(airline.slice(airline.lastIndexOf(' ') + 1)); // 'Air Portugal'
+
+console.log(airline.slice(-2)); // 'al
+console.log(airline.slice(1, -1)); // 'AP Air Portuga'
+
+// Example
+const checkMiddleSeat = function (seat) {
+  // B and E are the middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') {
+    console.log('Middle seat');
+  } else {
+    console.log('Not a middle seat');
+  }
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+// Why strings have methods?
+// JavaScript converts strings to objects.
+console.log(new String('jonas'));
+console.log(typeof new String('jonas')); // Convert to object, converts back when operations are done on it
+
 //////////////////////////////////////
 // Coding Challenge #3
 
@@ -63,50 +107,50 @@ Let's continue with our football betting app! This time, we have a map with a lo
       [FIRST HALF] 17: ⚽️ GOAL
 */
 
-const gameEvents = new Map([
-  [17, '⚽️ GOAL'],
-  [36, '🔁 Substitution'],
-  [47, '⚽️ GOAL'],
-  [61, '🔁 Substitution'],
-  [64, '🔶 Yellow card'],
-  [69, '🔴 Red card'],
-  [70, '🔁 Substitution'],
-  [72, '🔁 Substitution'],
-  [76, '⚽️ GOAL'],
-  [80, '⚽️ GOAL'],
-  [92, '🔶 Yellow card'],
-]);
+// const gameEvents = new Map([
+//   [17, '⚽️ GOAL'],
+//   [36, '🔁 Substitution'],
+//   [47, '⚽️ GOAL'],
+//   [61, '🔁 Substitution'],
+//   [64, '🔶 Yellow card'],
+//   [69, '🔴 Red card'],
+//   [70, '🔁 Substitution'],
+//   [72, '🔁 Substitution'],
+//   [76, '⚽️ GOAL'],
+//   [80, '⚽️ GOAL'],
+//   [92, '🔶 Yellow card'],
+// ]);
 
-// 1. Code OK
-const events = [...new Set(gameEvents.values())]; // Missed ... in the beginning to get an array
-console.log(events);
+// // 1. Code OK
+// const events = [...new Set(gameEvents.values())]; // Missed ... in the beginning to get an array
+// console.log(events);
 
-// 2. Code OK
-gameEvents.delete(64);
-console.log(gameEvents);
+// // 2. Code OK
+// gameEvents.delete(64);
+// console.log(gameEvents);
 
-// 3. Old code (still works)
-// const arr = [...gameEvents.keys()];
-// console.log(`An event happened, on average, every ${90 / arr.length} minutes`);
+// // 3. Old code (still works)
+// // const arr = [...gameEvents.keys()];
+// // console.log(`An event happened, on average, every ${90 / arr.length} minutes`);
 
-// New code
-console.log(
-  `An event happened, on average, every ${90 / gameEvents.size} minutes`
-);
+// // New code
+// console.log(
+//   `An event happened, on average, every ${90 / gameEvents.size} minutes`
+// );
 
-// 4. Code OK
-// for (const [key, value] of gameEvents) {
-//   if (key < 45) {
-//     console.log(`[FIRST HALF] ${key}: ${value}`);
-//   } else {
-//     console.log(`[SECOND HALF] ${key}: ${value}`);
-//   }
+// // 4. Code OK
+// // for (const [key, value] of gameEvents) {
+// //   if (key < 45) {
+// //     console.log(`[FIRST HALF] ${key}: ${value}`);
+// //   } else {
+// //     console.log(`[SECOND HALF] ${key}: ${value}`);
+// //   }
+// // }
+// // Better solution:
+// for (const [min, event] of gameEvents) {
+//   const half = min < 45 ? 'FIRST' : 'SECOND ';
+//   console.log(`[${half} HALF] ${min}: ${event}`);
 // }
-// Better solution:
-for (const [min, event] of gameEvents) {
-  const half = min < 45 ? 'FIRST' : 'SECOND ';
-  console.log(`[${half} HALF] ${min}: ${event}`);
-}
 
 // ///////////////////////// MAPS ITERATION ////////////////////////////////
 // const question = new Map([
