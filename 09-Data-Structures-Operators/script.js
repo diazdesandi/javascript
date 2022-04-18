@@ -51,6 +51,44 @@ const restaurant = {
   },
 };
 
+/////////////////// SETS ///////////////////
+// A set is basically just a collection of unique values.
+// So that means that a set can never have any duplicates.
+
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+console.log(ordersSet);
+console.log(new Set('Jonas'));
+console.log(ordersSet.size);
+console.log(ordersSet.has('Pizza'));
+console.log(ordersSet.has('Bread'));
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+ordersSet.delete('Risotto');
+console.log(ordersSet);
+
+// How to retrieve the values of a set?
+// there is no way of getting values out of a set.
+// It's better to use an array instead.
+
+for (const order of ordersSet) {
+  console.log(order);
+}
+
+// Example
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staffUnique = [...new Set(staff)]; // Creates a new array with unique values
+console.log(staffUnique);
+
+// Counting letters in a string
+console.log(new Set('jonasschmedtmann').size);
+
 ///////////////////////////////////////
 // Coding Challenge #2
 
@@ -71,80 +109,80 @@ BONUS: Create an object called 'scorers' which contains the names of the players
       }
 */
 
-const game = {
-  team1: 'Bayern Munich',
-  team2: 'Borrussia Dortmund',
-  players: [
-    [
-      'Neuer',
-      'Pavard',
-      'Martinez',
-      'Alaba',
-      'Davies',
-      'Kimmich',
-      'Goretzka',
-      'Coman',
-      'Muller',
-      'Gnarby',
-      'Lewandowski',
-    ],
-    [
-      'Burki',
-      'Schulz',
-      'Hummels',
-      'Akanji',
-      'Hakimi',
-      'Weigl',
-      'Witsel',
-      'Hazard',
-      'Brandt',
-      'Sancho',
-      'Gotze',
-    ],
-  ],
-  score: '4:0',
-  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
-  date: 'Nov 9th, 2037',
-  odds: {
-    team1: 1.33,
-    x: 3.25,
-    team2: 6.5,
-  },
-};
+// const game = {
+//   team1: 'Bayern Munich',
+//   team2: 'Borrussia Dortmund',
+//   players: [
+//     [
+//       'Neuer',
+//       'Pavard',
+//       'Martinez',
+//       'Alaba',
+//       'Davies',
+//       'Kimmich',
+//       'Goretzka',
+//       'Coman',
+//       'Muller',
+//       'Gnarby',
+//       'Lewandowski',
+//     ],
+//     [
+//       'Burki',
+//       'Schulz',
+//       'Hummels',
+//       'Akanji',
+//       'Hakimi',
+//       'Weigl',
+//       'Witsel',
+//       'Hazard',
+//       'Brandt',
+//       'Sancho',
+//       'Gotze',
+//     ],
+//   ],
+//   score: '4:0',
+//   scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+//   date: 'Nov 9th, 2037',
+//   odds: {
+//     team1: 1.33,
+//     x: 3.25,
+//     team2: 6.5,
+//   },
+// };
 
-// 1.
-// for (let i = 0; i < game.scored.length; i++) {
-//   console.log(`Goal ${i + 1}: ${game.scored[i]}`);
+// // 1.
+// // for (let i = 0; i < game.scored.length; i++) {
+// //   console.log(`Goal ${i + 1}: ${game.scored[i]}`);
+// // }
+// // Fixed code
+// for (const [i, player] of game.scored.entries()) {
+//   console.log(`Goal ${i + 1}: ${player}`);
 // }
-// Fixed code
-for (const [i, player] of game.scored.entries()) {
-  console.log(`Goal ${i + 1}: ${player}`);
-}
 
 // 2.
 // const scores = game.scored.map((player) => player.length);
 // const average = scores.reduce((acc, curr) => acc + curr) / scores.length;
 
 // Fixed code
-const odds = Object.values(game.odds);
-let average = 0;
-for (const odd of odds) {
-  average += odd;
-}
-average /= odds.length;
-console.log(average);
-
-// 3. Couldn't figure out how to do this one, but I think it's pretty simple. Need to print names instead of "undefined".
 // const odds = Object.values(game.odds);
-// Object.entries(game.odds).forEach((value) => {
-//   console.log(`Odd of victory ${game.team1}: ${value}`);
-// });
+// let average = 0;
+// for (const odd of odds) {
+//   average += odd;
+// }
+// average /= odds.length;
+// console.log(average);
 
-// Fixed code
-for (const [team, odd] of Object.entries(game.odds)) {
-  const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
-  console.log(`Odd of victory ${teamStr}: ${odd}`);
-}
+// // 3. Couldn't figure out how to do this one, but I think it's pretty simple. Need to print names instead of "undefined".
+// // const odds = Object.values(game.odds);
+// // Object.entries(game.odds).forEach((value) => {
+// //   console.log(`Odd of victory ${game.team1}: ${value}`);
+// // });
+
+// // Fixed code
+// for (const [team, odd] of Object.entries(game.odds)) {
+//   const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
+//   console.log(`Odd of victory ${teamStr}: ${odd}`);
+// }
 
 // 4. Bonus
 // const scorers = {
@@ -161,11 +199,11 @@ for (const [team, odd] of Object.entries(game.odds)) {
 // console.log(openStr);
 
 // Fixed code
-const scorers = {};
-for (const player of game.scored) {
-  scorers[player] ? scorers[player]++ : (scorers[player] = 1);
-}
-console.log(scorers);
+// const scorers = {};
+// for (const player of game.scored) {
+//   scorers[player] ? scorers[player]++ : (scorers[player] = 1);
+// }
+// console.log(scorers);
 
 /////////// Looping Objects: Object Keys, Values, and Entries ///////////
 // const properties = Object.keys(openingHours);
