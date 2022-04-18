@@ -77,22 +77,35 @@ const gameEvents = new Map([
   [92, '🔶 Yellow card'],
 ]);
 
-// 1.
-const events = [new Set(gameEvents.values())];
+// 1. Code OK
+const events = [...new Set(gameEvents.values())]; // Missed ... in the beginning to get an array
 console.log(events);
-// 2.
+
+// 2. Code OK
 gameEvents.delete(64);
 console.log(gameEvents);
-// 3.
-const arr = [...gameEvents.keys()];
-console.log(`An event happened, on average, every ${90 / arr.length} minutes`);
-// 4.
-for (const [key, value] of gameEvents) {
-  if (key < 45) {
-    console.log(`[FIRST HALF] ${key}: ${value}`);
-  } else {
-    console.log(`[SECOND HALF] ${key}: ${value}`);
-  }
+
+// 3. Old code (still works)
+// const arr = [...gameEvents.keys()];
+// console.log(`An event happened, on average, every ${90 / arr.length} minutes`);
+
+// New code
+console.log(
+  `An event happened, on average, every ${90 / gameEvents.size} minutes`
+);
+
+// 4. Code OK
+// for (const [key, value] of gameEvents) {
+//   if (key < 45) {
+//     console.log(`[FIRST HALF] ${key}: ${value}`);
+//   } else {
+//     console.log(`[SECOND HALF] ${key}: ${value}`);
+//   }
+// }
+// Better solution:
+for (const [min, event] of gameEvents) {
+  const half = min < 45 ? 'FIRST' : 'SECOND ';
+  console.log(`[${half} HALF] ${min}: ${event}`);
 }
 
 // ///////////////////////// MAPS ITERATION ////////////////////////////////
