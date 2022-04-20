@@ -28,7 +28,7 @@ createBooking('LH123');
 createBooking('LH123', 2, 800);
 createBooking('LH123', 2);
 createBooking('LH123', undefined, 1000); // numPassengers is undefined, so it will use the default value of 1.
-*/
+
 
 //////////////////// How Passing Arguments Works: Value vs. Reference ////////////////////
 const flight = 'LH234';
@@ -59,3 +59,32 @@ const newPassport = function (person) {
 // The interaction of multiple functions with the same object can create unexpected results.
 newPassport(jonas);
 checkIn(flight, jonas);
+*/
+
+//////////////////// Functions Accepting Callback Functions ////////////////////
+
+const oneWord = function (str) {
+  return str.replace(/ /g, '').toLowerCase();
+};
+
+const upperFirstWord = function (str) {
+  const [first, ...rest] = str.split(' ');
+  return [first.toUpperCase(), ...rest].join(' ');
+};
+
+// Higher-order function
+const transformer = function (str, fn) {
+  console.log(`Original string: ${str}`);
+  console.log(`Transformed string: ${fn(str)}`);
+  console.log(`Transformed by: ${fn.name}`); // Prints the name of the function (fn.name)
+};
+
+transformer('JavaScript is the best!', upperFirstWord);
+transformer('JavaScript is the best!', oneWord);
+
+// JavaScript uses callbacks all the time.
+const high5 = function () {
+  console.log('👋');
+};
+document.body.addEventListener('click', high5);
+['Jonas', 'Marhta', 'Adam'].forEach(high5);
