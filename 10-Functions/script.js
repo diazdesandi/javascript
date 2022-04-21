@@ -226,7 +226,7 @@ BONUS: Use the 'displayResults' method to display the 2 arrays in the test data.
 BONUS TEST DATA 1: [5, 2, 3]
 BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 */
-
+/*
 const poll = {
   question: 'What is your favourite programming language?',
   options: ['0 : JavaScript', '1 : Python', '2 : Rust', '3 : C++'],
@@ -270,3 +270,28 @@ document
 // Bonus:
 poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
 poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
+*/
+
+//////////////////// Immediately Invoked Function Expressions (IIFE) ////////////////////
+
+const runOnce = function () {
+  console.log('This will never run again!');
+};
+runOnce();
+
+// IIFE (Immediately Invoked Function Expression)
+// Declare a function that runs immediately.
+(function () {
+  console.log('This will never run again!');
+  const isPrivate = 23;
+})();
+
+// console.log(isPrivate); // ReferenceError: isPrivate is not defined
+
+(() => console.log('This will ALSO never run again!'))();
+
+{
+  const isPrivate = 23;
+  var notPrivate = 46;
+}
+console.log(notPrivate);
