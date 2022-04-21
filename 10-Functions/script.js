@@ -274,24 +274,63 @@ poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
 
 //////////////////// Immediately Invoked Function Expressions (IIFE) ////////////////////
 
-const runOnce = function () {
-  console.log('This will never run again!');
+// const runOnce = function () {
+//   console.log('This will never run again!');
+// };
+// runOnce();
+
+// // IIFE (Immediately Invoked Function Expression)
+// // Declare a function that runs immediately.
+// (function () {
+//   console.log('This will never run again!');
+//   const isPrivate = 23;
+// })();
+
+// // console.log(isPrivate); // ReferenceError: isPrivate is not defined
+
+// (() => console.log('This will ALSO never run again!'))();
+
+// {
+//   const isPrivate = 23;
+//   var notPrivate = 46;
+// }
+// console.log(notPrivate);
+
+//////////////////// Closures ////////////////////
+const secureBooking = function () {
+  let passengerCount = 0;
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
 };
-runOnce();
 
-// IIFE (Immediately Invoked Function Expression)
-// Declare a function that runs immediately.
-(function () {
-  console.log('This will never run again!');
-  const isPrivate = 23;
-})();
+const booker = secureBooking();
 
-// console.log(isPrivate); // ReferenceError: isPrivate is not defined
+booker(); // 1 passenger
+booker(); // 2 passengers
+booker(); // 3 passengers
 
-(() => console.log('This will ALSO never run again!'))();
+console.dir(booker);
 
-{
-  const isPrivate = 23;
-  var notPrivate = 46;
-}
-console.log(notPrivate);
+/*
+Closure makes a function remember all the variables that existed at the 
+function's birthplace essentially, so we can imagine the secure booking 
+as being the  birthplace of this function. So of the Booker function, 
+essentially. And so this function remembers everything at its birthplace, 
+by the time it was created.
+
+A function has access to the variable envieronment (VE) of the execution 
+context in which it was created.
+
+Closure: VE attached to the function, exactly as it was a tthte time and 
+place the function was created.
+
+So in a sense, the scope chain is actually preserved through the closure, 
+even when a scope has already been destroyed because its execution context 
+is gone.
+
+A closure gives a function access to all the variables of it's parent function,
+even after that parent function has returned. The function keeps a reference to 
+it's outer scope, which preserves the scope chain throughout time.
+*/
