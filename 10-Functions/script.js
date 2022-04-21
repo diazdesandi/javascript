@@ -90,19 +90,71 @@ checkIn(flight, jonas);
 // ['Jonas', 'Martha', 'Adam'].forEach(high5);
 
 //////////////////// Functions Returning Functions ////////////////////
-const greet = function (greeting) {
-  return function (name) {
-    console.log(`${greeting} ${name}`);
-  };
+// const greet = function (greeting) {
+//   return function (name) {
+//     console.log(`${greeting} ${name}`);
+//   };
+// };
+
+// const greeterHey = greet('Hey'); // greeterHey is a now a function.
+// greeterHey('Jonas');
+// greeterHey('Steven');
+
+// greet('Hello')('Jonas');
+
+// // Challenge
+// // Rewriting function using arrow functions.
+// const greetArr = (greeting) => (name) => console.log(`${greeting} ${name}`);
+// greetArr('Hi')('Jonas');
+
+//////////////////// The call and apply Methods ////////////////////
+const lufthansa = {
+  airline: 'Lufthansa',
+  iatacode: 'LH',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iatacode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iatacode}${flightNum}`, name });
+  },
 };
 
-const greeterHey = greet('Hey'); // greeterHey is a now a function.
-greeterHey('Jonas');
-greeterHey('Steven');
+lufthansa.book(239, 'Jonas Schmedtmann');
+lufthansa.book(635, 'John Smith');
+console.log(lufthansa);
 
-greet('Hello')('Jonas');
+const eurowings = {
+  airline: 'Eurowings',
+  iatacode: 'EW',
+  bookings: [],
+};
 
-// Challenge
-// Rewriting function using arrow functions.
-const greetArr = (greeting) => (name) => console.log(`${greeting} ${name}`);
-greetArr('Hi')('Jonas');
+const book = lufthansa.book; // We are copying the function to use it on other objects.
+
+// Doesn't work.
+// book(23, 'Sarah Williams');
+
+// Call method.
+book.call(eurowings, 23, 'Sarah Williams'); // Allows to manually set the function.
+console.log(eurowings);
+
+book.call(lufthansa, 239, 'Mary Cooper');
+console.log(lufthansa);
+
+const swiss = {
+  airline: 'Swiss Air Lines',
+  iatacode: 'LX',
+  bookings: [],
+};
+
+book.call(swiss, 583, 'Mary Cooper');
+console.log(swiss);
+
+// Apply method.
+// Receives an array of arguments.
+const flightData = [583, 'George Cooper'];
+// book.apply(swiss, flightData);
+
+// Modern JavaScript uses:
+book.call(swiss, ...flightData);
