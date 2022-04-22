@@ -206,12 +206,15 @@ GOOD LUCK 😀
 */
 
 const checkDogs = function (dogsJulia, dogsKate) {
-  const dogsJuliaCopy = [...dogsJulia];
+  // const dogsJuliaCopy = [...dogsJulia];
+  const dogsJuliaCopy = dogsJulia.slice();
   dogsJuliaCopy.splice(0, 1);
-  dogsJuliaCopy.splice(2, 3);
+  dogsJuliaCopy.splice(-2);
+  // dogsJuliaCopy.splice(2, 3);
   console.log(dogsJuliaCopy);
 
-  const dogs = [...dogsJuliaCopy, ...dogsKate];
+  // const dogs = [...dogsJuliaCopy, ...dogsKate];
+  const dogs = dogsJuliaCopy.concat(dogsKate);
 
   dogs.forEach(function (dog, i) {
     if (dog >= 3) {
