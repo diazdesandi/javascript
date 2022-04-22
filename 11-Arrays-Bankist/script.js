@@ -77,32 +77,46 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // 142. Simple Array Methods
 // SLICE
-let arr = ['a', 'b', 'c', 'd', 'e'];
-console.log(arr.slice(2));
-console.log(arr.slice(2, 4));
-console.log(arr.slice(-2)); // last two elements from the end
-console.log(arr.slice(-1)); // last element of any array
-console.log(arr.slice(1, -2)); // elements from index 1 to index -2
-console.log([...arr]); // spread operator
+// let arr = ['a', 'b', 'c', 'd', 'e'];
+// console.log(arr.slice(2));
+// console.log(arr.slice(2, 4));
+// console.log(arr.slice(-2)); // last two elements from the end
+// console.log(arr.slice(-1)); // last element of any array
+// console.log(arr.slice(1, -2)); // elements from index 1 to index -2
+// console.log([...arr]); // spread operator
 
-// SPLICE
-// Mutates the original array
-// console.log(arr.splice(2)); // ['c', 'd', 'e']
-// console.log(arr); // Removes the elements from index 2 to the end. // ['a', 'b']
-arr.splice(-1); // Removes the last element
-console.log(arr); // ['a', 'b', 'c', 'd']
-arr.splice(1, 2); // Removes the elements from index 1 to index 2
-console.log(arr); // ['a', 'd']
+// // SPLICE
+// // Mutates the original array
+// // console.log(arr.splice(2)); // ['c', 'd', 'e']
+// // console.log(arr); // Removes the elements from index 2 to the end. // ['a', 'b']
+// arr.splice(-1); // Removes the last element
+// console.log(arr); // ['a', 'b', 'c', 'd']
+// arr.splice(1, 2); // Removes the elements from index 1 to index 2
+// console.log(arr); // ['a', 'd']
 
-// REVERSE
-arr = ['a', 'b', 'c', 'd', 'e'];
-const arr2 = ['j', 'i', 'h', 'g', 'f'];
-console.log(arr2.reverse()); // ['f', 'g', 'h', 'i', 'j']
-console.log(arr2);
+// // REVERSE
+// arr = ['a', 'b', 'c', 'd', 'e'];
+// const arr2 = ['j', 'i', 'h', 'g', 'f'];
+// console.log(arr2.reverse()); // ['f', 'g', 'h', 'i', 'j']
+// console.log(arr2);
 
-// CONCAT
-const letters = arr.concat(arr2);
-console.log(letters); // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+// // CONCAT
+// const letters = arr.concat(arr2);
+// console.log(letters); // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
 
-// JOIN
-console.log(letters.join('-')); // a-b-c-d-e-f-g-h-i-j
+// // JOIN
+// console.log(letters.join('-')); // a-b-c-d-e-f-g-h-i-j
+
+/////////////////////////////////////////////////
+
+// 143. The new at Method
+const arr = [23, 11, 64];
+console.log(arr[0]);
+console.log(arr.at(0));
+
+// getting last array element
+console.log(arr[arr.length - 1]); // last element of any array
+console.log(arr.slice(-1)[0]); // last element of any array
+console.log(arr.at(-1)); // last element of any array
+
+console.log('jonas'.at(0)); // j
