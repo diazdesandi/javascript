@@ -72,7 +72,7 @@ const displayMovements = function (movements) {
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-      <div class="movements__value">${mov}</div>
+      <div class="movements__value">${mov}€</div>
     </div>`;
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
@@ -82,9 +82,33 @@ displayMovements(account1.movements);
 
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance}€`;
 };
 calcDisplayBalance(account1.movements);
+
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter((mov) => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${incomes} €`;
+
+  const expenses = movements
+    .filter((mov) => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(expenses)} €`;
+
+  const interest = movements
+    .filter((mov) => mov > 0)
+    .map((deposit) => (deposit * 1.2) / 100)
+    .filter((int, i, arr) => {
+      console.log(arr);
+      return int >= 1;
+    }) // Excluding interest below 1€
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest} €`;
+};
+
+calcDisplaySummary(account1.movements);
 
 /////////////////////////////////////////////////
 
@@ -346,36 +370,49 @@ TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
 TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 */
 
-const calcAverageHumanAge = function (ages) {
-  // Optimal solution:
-  /*
-  const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
-  const adults = humanAges.filter(age => age >= 18);
-  console.log(humanAges);
-  console.log(adults);
-  */
-  const humanAges = ages.map(function (age) {
-    if (age <= 2) {
-      return 2 * age;
-    } else {
-      return 16 + age * 4;
-    }
-  });
+// const calcAverageHumanAge = function (ages) {
+//   // Optimal solution:
+//   /*
+//   const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+//   const adults = humanAges.filter(age => age >= 18);
+//   console.log(humanAges);
+//   console.log(adults);
+//   */
+//   const humanAges = ages.map(function (age) {
+//     if (age <= 2) {
+//       return 2 * age;
+//     } else {
+//       return 16 + age * 4;
+//     }
+//   });
 
-  const adultDogs = humanAges.filter(function (age) {
-    return age >= 18;
-  });
+//   const adultDogs = humanAges.filter(function (age) {
+//     return age >= 18;
+//   });
 
-  const average =
-    adultDogs.reduce(function (acc, cur) {
-      return acc + cur;
-    }, 0) / adultDogs.length;
+//   const average =
+//     adultDogs.reduce(function (acc, cur) {
+//       return acc + cur;
+//     }, 0) / adultDogs.length;
 
-  return average;
-};
+//   return average;
+// };
 
-const testData1 = [5, 2, 4, 1, 15, 8, 3];
-const testData2 = [16, 6, 10, 5, 6, 1, 4];
+// const testData1 = [5, 2, 4, 1, 15, 8, 3];
+// const testData2 = [16, 6, 10, 5, 6, 1, 4];
 
-console.log(calcAverageHumanAge(testData1));
-console.log(calcAverageHumanAge(testData2));
+// console.log(calcAverageHumanAge(testData1));
+// console.log(calcAverageHumanAge(testData2));
+
+/////////////////////////////////////////////////
+
+// 155. The Magic of Chaining Methods
+const eurToUsd = 1.1;
+
+// PIPELINE
+const totalDepositUSD = movements
+  .filter((mov) => mov > 0)
+  .map((mov) => mov * eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(totalDepositUSD);
