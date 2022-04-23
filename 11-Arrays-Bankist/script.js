@@ -80,21 +80,25 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcDisplayBalance(account1.movements);
+
 /////////////////////////////////////////////////
 
 // 151. Computing Usernames
-// const createUsernames = function (accs) {
-//   accs.forEach(function (acc) {
-//     acc.username = acc.owner
-//       .toLowerCase()
-//       .split(' ')
-//       .map((name) => name[0])
-//       .join('');
-//   });
-// };
-
-// createUsernames(accounts);
-// console.log(accounts);
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map((name) => name[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -300,3 +304,30 @@ GOOD LUCK 😀
 //   return mov < 0;
 // });
 // console.log(withdrawals);
+
+/////////////////////////////////////////////////
+
+// 153. The reduce Method
+console.log(movements);
+
+// accumulator -> SNOWBALL
+// const balance = movements.reduce(function (acc, cur, i, arr) {
+//   console.log(`Iteration ${i}: ${acc}`);
+//   return acc + cur;
+// }, 0);
+
+// Simplified version
+const balance = movements.reduce((acc, cur) => acc + cur, 0);
+
+console.log(balance);
+
+let balance2 = 0;
+for (const mov of movements) balance2 += mov;
+console.log(balance2);
+
+// Maximum value
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements[0]);
+console.log(max);
