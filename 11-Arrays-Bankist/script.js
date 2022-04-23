@@ -83,18 +83,18 @@ displayMovements(account1.movements);
 /////////////////////////////////////////////////
 
 // 151. Computing Usernames
-const createUsernames = function (accs) {
-  accs.forEach(function (acc) {
-    acc.username = acc.owner
-      .toLowerCase()
-      .split(' ')
-      .map((name) => name[0])
-      .join('');
-  });
-};
+// const createUsernames = function (accs) {
+//   accs.forEach(function (acc) {
+//     acc.username = acc.owner
+//       .toLowerCase()
+//       .split(' ')
+//       .map((name) => name[0])
+//       .join('');
+//   });
+// };
 
-createUsernames(accounts);
-console.log(accounts);
+// createUsernames(accounts);
+// console.log(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -283,3 +283,20 @@ GOOD LUCK 😀
 // );
 
 // console.log(movementsDescriptions);
+
+/////////////////////////////////////////////////
+
+// 152. The filter method.
+// const deposits = movements.filter(function (mov) {
+//   return mov > 0;
+// });
+// console.log(deposits);
+
+// const depositsFor = [];
+// for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+// console.log(depositsFor);
+
+// const withdrawals = movements.filter(function (mov) {
+//   return mov < 0;
+// });
+// console.log(withdrawals);
