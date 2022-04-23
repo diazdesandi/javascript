@@ -347,6 +347,13 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 */
 
 const calcAverageHumanAge = function (ages) {
+  // Optimal solution:
+  /*
+  const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+  const adults = humanAges.filter(age => age >= 18);
+  console.log(humanAges);
+  console.log(adults);
+  */
   const humanAges = ages.map(function (age) {
     if (age <= 2) {
       return 2 * age;
