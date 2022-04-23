@@ -34,6 +34,7 @@ const account4 = {
 };
 
 const accounts = [account1, account2, account3, account4];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // Elements
 const labelWelcome = document.querySelector('.welcome');
@@ -205,28 +206,64 @@ TEST DATA 2: Julia's data [9, 16, 6, 8, 3], Kate's data [10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 
-const checkDogs = function (dogsJulia, dogsKate) {
-  // const dogsJuliaCopy = [...dogsJulia];
-  const dogsJuliaCopy = dogsJulia.slice();
-  dogsJuliaCopy.splice(0, 1);
-  dogsJuliaCopy.splice(-2);
-  // dogsJuliaCopy.splice(2, 3);
-  console.log(dogsJuliaCopy);
+// const checkDogs = function (dogsJulia, dogsKate) {
+//   // const dogsJuliaCopy = [...dogsJulia];
+//   const dogsJuliaCopy = dogsJulia.slice();
+//   dogsJuliaCopy.splice(0, 1);
+//   dogsJuliaCopy.splice(-2);
+//   // dogsJuliaCopy.splice(2, 3);
+//   console.log(dogsJuliaCopy);
 
-  // const dogs = [...dogsJuliaCopy, ...dogsKate];
-  const dogs = dogsJuliaCopy.concat(dogsKate);
+//   // const dogs = [...dogsJuliaCopy, ...dogsKate];
+//   const dogs = dogsJuliaCopy.concat(dogsKate);
 
-  dogs.forEach(function (dog, i) {
-    if (dog >= 3) {
-      console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
-    } else {
-      console.log(`Dog number ${i + 1} is still a puppy 🐶`);
-    }
-  });
-};
+//   dogs.forEach(function (dog, i) {
+//     if (dog >= 3) {
+//       console.log(`Dog number ${i + 1} is an adult, and is ${dog} years old`);
+//     } else {
+//       console.log(`Dog number ${i + 1} is still a puppy 🐶`);
+//     }
+//   });
+// };
 
-const dogsJ = [3, 5, 2, 12, 7];
-const dogsK = [4, 1, 15, 8, 3];
+// const dogsJ = [3, 5, 2, 12, 7];
+// const dogsK = [4, 1, 15, 8, 3];
 
 // const dogsJ = [9, 16, 6, 8, 3];
 // const dogsK = [10, 5, 6, 1, 4];
+
+/////////////////////////////////////////////////
+
+// 150. The map method.
+const eurToUsd = 1.1;
+
+const movementsUSD = movements.map(function (mov) {
+  return mov * eurToUsd;
+});
+
+// const movementsUSD = movements.map((mov) => mov * eurToUsd);
+
+console.log(movements);
+console.log(movementsUSD);
+
+const movementsUSDfor = [];
+for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+console.log(movementsUSDfor);
+
+// const movementsDescriptions = movements.map((mov, i, arr) => {
+//   if (mov > 0) {
+//     console.log(`Movement ${i + 1}: You deposited $${mov}`);
+//   } else {
+//     console.log(`Movement ${i + 1}: You withdrew $${Math.abs(mov)}`);
+//   }
+// });
+
+// Simplified version
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} $${Math.abs(
+      mov
+    )}`
+);
+
+console.log(movementsDescriptions);
