@@ -78,13 +78,13 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
+// displayMovements(account1.movements);
 
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance}€`;
 };
-calcDisplayBalance(account1.movements);
+// calcDisplayBalance(account1.movements);
 
 const calcDisplaySummary = function (movements) {
   const incomes = movements
@@ -108,7 +108,7 @@ const calcDisplaySummary = function (movements) {
   labelSumInterest.textContent = `${interest} €`;
 };
 
-calcDisplaySummary(account1.movements);
+// calcDisplaySummary(account1.movements);
 
 /////////////////////////////////////////////////
 
@@ -332,29 +332,29 @@ GOOD LUCK 😀
 /////////////////////////////////////////////////
 
 // 153. The reduce Method
-console.log(movements);
+// console.log(movements);
 
-// accumulator -> SNOWBALL
-// const balance = movements.reduce(function (acc, cur, i, arr) {
-//   console.log(`Iteration ${i}: ${acc}`);
-//   return acc + cur;
-// }, 0);
+// // accumulator -> SNOWBALL
+// // const balance = movements.reduce(function (acc, cur, i, arr) {
+// //   console.log(`Iteration ${i}: ${acc}`);
+// //   return acc + cur;
+// // }, 0);
 
-// Simplified version
-const balance = movements.reduce((acc, cur) => acc + cur, 0);
+// // Simplified version
+// const balance = movements.reduce((acc, cur) => acc + cur, 0);
 
-console.log(balance);
+// console.log(balance);
 
-let balance2 = 0;
-for (const mov of movements) balance2 += mov;
-console.log(balance2);
+// let balance2 = 0;
+// for (const mov of movements) balance2 += mov;
+// console.log(balance2);
 
-// Maximum value
-const max = movements.reduce((acc, mov) => {
-  if (acc > mov) return acc;
-  else return mov;
-}, movements[0]);
-console.log(max);
+// // Maximum value
+// const max = movements.reduce((acc, mov) => {
+//   if (acc > mov) return acc;
+//   else return mov;
+// }, movements[0]);
+// console.log(max);
 
 ///////////////////////////////////////
 // Coding Challenge #2
@@ -407,12 +407,34 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 /////////////////////////////////////////////////
 
 // 155. The Magic of Chaining Methods
-const eurToUsd = 1.1;
+// const eurToUsd = 1.1;
 
-// PIPELINE
-const totalDepositUSD = movements
-  .filter((mov) => mov > 0)
-  .map((mov) => mov * eurToUsd)
-  .reduce((acc, mov) => acc + mov, 0);
+// // PIPELINE
+// const totalDepositUSD = movements
+//   .filter((mov) => mov > 0)
+//   .map((mov) => mov * eurToUsd)
+//   .reduce((acc, mov) => acc + mov, 0);
 
-console.log(totalDepositUSD);
+// console.log(totalDepositUSD);
+
+// Coding Challenge #3
+
+/* 
+Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this time as an arrow function, and using chaining!
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+*/
+
+const calcAverageHumanAge = (ages) => {
+  const humanAges = ages.map((age) => (age <= 2 ? 2 * age : 16 + age * 4));
+  const adultDogs = humanAges.filter((age) => age >= 18);
+  const average =
+    adultDogs.reduce((acc, cur) => acc + cur, 0) / adultDogs.length;
+  return average;
+};
+
+const testData1 = [5, 2, 4, 1, 15, 8, 3];
+const testData2 = [16, 6, 10, 5, 6, 1, 4];
+
+console.log(calcAverageHumanAge(testData1));
+console.log(calcAverageHumanAge(testData2));
