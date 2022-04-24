@@ -78,37 +78,32 @@ const displayMovements = function (movements) {
   });
 };
 
-// displayMovements(account1.movements);
-
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance}€`;
 };
-// calcDisplayBalance(account1.movements);
 
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
+const calcDisplaySummary = function (acc) {
+  const incomes = acc.movements
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `${incomes} €`;
 
-  const expenses = movements
+  const expenses = acc.movements
     .filter((mov) => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `${Math.abs(expenses)} €`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter((mov) => mov > 0)
-    .map((deposit) => (deposit * 1.2) / 100)
+    .map((deposit) => (deposit * acc.interestRate) / 100)
     .filter((int, i, arr) => {
-      console.log(arr);
+      // console.log(arr);
       return int >= 1;
     }) // Excluding interest below 1€
     .reduce((acc, int) => acc + int, 0);
   labelSumInterest.textContent = `${interest} €`;
 };
-
-// calcDisplaySummary(account1.movements);
 
 /////////////////////////////////////////////////
 
@@ -123,6 +118,36 @@ const createUsernames = function (accs) {
   });
 };
 createUsernames(accounts);
+
+/////////////////////////////////////////////////
+
+// 158. Implementing Login
+// Event handler
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    // Display UI and message
+    labelWelcome.textContent = `Welcome ${currentAccount.owner.split(' ')[0]}`;
+    containerApp.style.opacity = 100;
+
+    // Clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+    // Display movements
+    displayMovements(currentAccount.movements);
+    // Display balance
+    calcDisplayBalance(currentAccount.movements);
+    // Display summary
+    calcDisplaySummary(currentAccount);
+  }
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -449,9 +474,9 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 /////////////////////////////////////////////////
 
 // 157. The find Method
-const firstWithdrawal = movements.find((mov) => mov < 0);
-console.log(movements);
-console.log(firstWithdrawal);
+// const firstWithdrawal = movements.find((mov) => mov < 0);
+// console.log(movements);
+// console.log(firstWithdrawal);
 
-const account = accounts.find((acc) => acc.owner === 'Jessica Davis');
-console.log(account);
+// const account = accounts.find((acc) => acc.owner === 'Jessica Davis');
+// console.log(account);
