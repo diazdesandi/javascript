@@ -425,23 +425,33 @@ TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
 TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 */
 
-const calcAverageHumanAge = (ages) => {
-  const humanAges = ages.map((age) => (age <= 2 ? 2 * age : 16 + age * 4));
-  const adultDogs = humanAges.filter((age) => age >= 18);
-  const average =
-    adultDogs.reduce((acc, cur) => acc + cur, 0) / adultDogs.length;
-  return average;
-};
+// const calcAverageHumanAge = (ages) => {
+//   const humanAges = ages.map((age) => (age <= 2 ? 2 * age : 16 + age * 4));
+//   const adultDogs = humanAges.filter((age) => age >= 18);
+//   const average =
+//     adultDogs.reduce((acc, cur) => acc + cur, 0) / adultDogs.length;
+//   return average;
+// };
 
-// Optimal solution:
-// const calcAverageHumanAge = ages =>
-//   ages
-//     .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
-//     .filter(age => age >= 18)
-//     .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
+// // Optimal solution:
+// // const calcAverageHumanAge = ages =>
+// //   ages
+// //     .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+// //     .filter(age => age >= 18)
+// //     .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
 
-const testData1 = [5, 2, 4, 1, 15, 8, 3];
-const testData2 = [16, 6, 10, 5, 6, 1, 4];
+// const testData1 = [5, 2, 4, 1, 15, 8, 3];
+// const testData2 = [16, 6, 10, 5, 6, 1, 4];
 
-console.log(calcAverageHumanAge(testData1));
-console.log(calcAverageHumanAge(testData2));
+// console.log(calcAverageHumanAge(testData1));
+// console.log(calcAverageHumanAge(testData2));
+
+/////////////////////////////////////////////////
+
+// 157. The find Method
+const firstWithdrawal = movements.find((mov) => mov < 0);
+console.log(movements);
+console.log(firstWithdrawal);
+
+const account = accounts.find((acc) => acc.owner === 'Jessica Davis');
+console.log(account);
