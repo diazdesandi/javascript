@@ -557,22 +557,56 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 /////////////////////////////////////////////////
 
 // 161. some and every
-console.log(movements);
+// console.log(movements);
 
-// Equality
-console.log(movements.includes(-130));
+// // Equality
+// console.log(movements.includes(-130));
 
-// SOME: Condition
-const anyDeposits = movements.some((mov) => mov > 0); // movements over 0
-console.log(anyDeposits);
+// // SOME: Condition
+// const anyDeposits = movements.some((mov) => mov > 0); // movements over 0
+// console.log(anyDeposits);
 
-// EVERY: Condition
-// Returns true if all elements in the array satisfy the condition
-console.log(movements.every((mov) => mov > 0));
-console.log(account4.movements.every((mov) => mov > 0));
+// // EVERY: Condition
+// // Returns true if all elements in the array satisfy the condition
+// console.log(movements.every((mov) => mov > 0));
+// console.log(account4.movements.every((mov) => mov > 0));
 
-// Separate callback
-const deposit = (mov) => mov > 0;
-console.log(movements.some(deposit));
-console.log(movements.every(deposit));
-console.log(movements.filter(deposit));
+// // Separate callback
+// const deposit = (mov) => mov > 0;
+// console.log(movements.some(deposit));
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
+
+/////////////////////////////////////////////////
+
+// 162. flat and flatMap
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+// const accountMovements = accounts.map((acc) => acc.movements);
+// console.log(accountMovements);
+
+// const allMovements = accountMovements.flat();
+// console.log(allMovements);
+// const overalBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overalBalance);
+
+// Using chaining methods
+
+// flat
+// multiple levels deep
+const overalBalance = accounts
+  .map((acc) => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
+
+// flat map
+// better performance than flat, one level deep
+const overalBalance2 = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance2);
