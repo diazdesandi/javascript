@@ -824,18 +824,34 @@ const ownersEatTooLittle = dogs
   .map((dog) => dog.owners);
 console.log(ownersEatTooLittle);
 
+// 3. Optimal solution
+/*
+const ownersEatTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recFood)
+  .flatMap(dog => dog.owners);
+// .flat();
+console.log(ownersEatTooMuch);
+const ownersEatTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recFood)
+  .flatMap(dog => dog.owners);
+console.log(ownersEatTooLittle);
+*/
+
 // 4.
 console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much!`);
 console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too little!`);
 
-console.log('5:');
 // 5.
 const dogsEatingExactly = dogs.some(
   (dog) => dog.curFood === dog.recommendedFood
 );
 console.log(dogsEatingExactly);
 
-console.log('6:');
+// 5. Optimal solution
+/*
+console.log(dogs.some(dog => dog.curFood === dog.recFood));
+*/
+
 // 6.
 const dogsEatingOkay = dogs.some((dog) => {
   const current = dog.curFood;
@@ -844,7 +860,13 @@ const dogsEatingOkay = dogs.some((dog) => {
 });
 console.log(dogsEatingOkay);
 
-console.log('7:');
+// 6. Optimal solution
+/*
+const checkEatingOkay = dog =>
+  dog.curFood > dog.recFood * 0.9 && dog.curFood < dog.recFood * 1.1;
+console.log(dogs.some(checkEatingOkay));
+*/
+
 // 7.
 const dogsEatingOkayCopy = [...dogs];
 const dogsEatingOkayCopy2 = dogsEatingOkayCopy.filter(
@@ -854,7 +876,12 @@ const dogsEatingOkayCopy2 = dogsEatingOkayCopy.filter(
 );
 console.log(dogsEatingOkayCopy2);
 
-console.log('8:');
+// 7. Optimal solution
+// console.log(dogs.filter(checkEatingOkay));
+
 // 8.
 const dogsSorted = dogs.sort((a, b) => a.recommendedFood - b.recommendedFood);
 console.log(dogsSorted);
+
+// const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood);
+// console.log(dogsSorted);
