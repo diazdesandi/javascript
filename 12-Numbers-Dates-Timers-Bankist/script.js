@@ -330,7 +330,6 @@ console.log(Math.floor(-23.3));
 console.log((2.7).toFixed(0)); // 2
 console.log((2.7).toFixed(3)); // 2.70000
 console.log(+(2.345).toFixed(2)); // 2
-*/
 
 // 172. The Remainder Operator
 // Simply returns the remainder of a division.
@@ -363,3 +362,21 @@ labelBalance.addEventListener('click', function () {
     }
   });
 });
+*/
+
+// 173. Numeric Separators
+// 287,460,000,000
+const diameter = 287_460_000_000; // Undescore is a separator, ignored by JS.
+console.log(diameter);
+
+const price = 345_99;
+console.log(price);
+
+const transferFee1 = 15_00;
+const transferFee2 = 1_500;
+
+const PI = 3.1415;
+console.log(PI);
+
+console.log(Number('230_000')); // NaN
+console.log(parseInt('230,000')); // 230
