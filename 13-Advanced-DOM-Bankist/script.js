@@ -37,7 +37,7 @@ console.log(document.head);
 console.log(document.body);
 
 const header = document.querySelector('.header');
-const allSections = document.querySelectorAll('section');
+const allSections = document.querySelectorAll('.section');
 console.log(allSections);
 
 document.getElementById('section--1');
@@ -56,8 +56,8 @@ message.classList.add('cookie-message');
 message.innerHTML =
   'We use cookies for improved functionality and analytics. <button class="btn--close-cookie">Got it!</button>';
 
-header.prepend(message);
-// header.append(message);
+// header.prepend(message);
+header.append(message);
 // header.append(message.cloneNode(true)); // Both messages on screen
 
 // header.before(message); // Inserts before the header element
@@ -67,5 +67,57 @@ header.prepend(message);
 document
   .querySelector('.btn--close-cookie')
   .addEventListener('click', function () {
-    message.remove();
+    // message.remove();
+    message.parentElement.removeChild(message);
   });
+
+// 187. Styles, Attributes and Classes
+// Styles
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+
+console.log(message.style.height); // Doesn't work because we haven't set a value
+console.log(message.style.backgroundColor); // Works because we've set a value
+
+console.log(getComputedStyle(message).color); // Gets the computed style of the element
+
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// Attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className);
+
+logo.alt = 'Beautiful minimalist logo';
+
+// Non - standard attributes
+console.log(logo.designer); // Doesn't work
+console.log(logo.getAttribute('designer')); // Works
+logo.setAttribute('company', 'Bankist');
+
+console.log(logo.src);
+console.log(logo.getAttribute('src'));
+
+const link = document.querySelector('.twitter-link');
+console.log(link.href);
+console.log(link.getAttribute('href'));
+
+// Data attributes
+console.log(logo.dataset.versionNumber); // data-version-number, write in camelCase
+
+// Classes
+// These four methods here make it really nice to work with the classes by simply allowing us
+// to add and remove classes based on their names, without interfering with the classes
+// that are already there.
+logo.classList.add('c', 'j');
+logo.classList.remove('c', 'j');
+logo.classList.toggle('c');
+logo.classList.contains('c');
+
+// Don't use
+// Override the default class
+logo.className = 'jonas';
