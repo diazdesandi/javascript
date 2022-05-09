@@ -219,8 +219,8 @@ allSections.forEach(function (section) {
 
 // 199. Lazy Loading Images
 // Lazy loading images
-const imgTargets =  document.querySelectorAll('img[data-src]');
-console.log(imgTargets);
+const imgTargets = document.querySelectorAll('img[data-src]');
+// console.log(imgTargets);
 
 const loadImg = function (entries, observer) {
   const [entry] = entries;
@@ -232,7 +232,6 @@ const loadImg = function (entries, observer) {
 
   entry.target.addEventListener('load', function () {
     entry.target.classList.remove('lazy-img');
-
   });
 
   observer.unobserve(entry.target);
@@ -244,7 +243,52 @@ const imgObserver = new IntersectionObserver(loadImg, {
   rootMargin: '200px',
 });
 
-imgTargets.forEach(img => imgObserver.observe(img));
+imgTargets.forEach((img) => imgObserver.observe(img));
+
+// 200. Building a Slider Component: Part 1
+// Slider component
+
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+const maxSlide = slides.length;
+
+let curSlide = 0;
+
+// const slider = document.querySelector('.slider');
+// slider.style.transform = 'scale(0.5)';
+// slider.style.overflow = 'visible';
+
+const goToSlide = function (slide) {
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+  );
+};
+
+goToSlide(0);
+
+const nextSlide = function () {
+  if (curSlide === maxSlide - 1) {
+    curSlide = 0;
+  } else {
+    curSlide++;
+  }
+  goToSlide(curSlide);
+};
+
+const prevSlide = function () {
+  if (curSlide === 0) {
+    curSlide = maxSlide - 1;
+  } else {
+    curSlide--;
+  }
+  goToSlide(curSlide);
+};
+
+// Next slide
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', prevSlide);
+
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////
