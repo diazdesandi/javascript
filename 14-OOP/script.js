@@ -161,6 +161,12 @@ class PersonCl {
   get fullName() {
     return this._fullName;
   }
+
+  // 215. Static Methods
+  static hey() {
+    console.log('Hey there!');
+    console.log(this);
+  }
 }
 
 const jessica = new PersonCl('Jessica Davis', 1996);
