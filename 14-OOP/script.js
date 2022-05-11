@@ -129,81 +129,105 @@ mercedes.accelerate();
 // const PersonCl = class {}
 
 // class declaration
-class PersonCl {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
+// class PersonCl {
+//   constructor(fullName, birthYear) {
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
 
-  // Methods will be added to .prototype property
-  calcAge() {
-    console.log(2037 - this.birthYear);
-  }
+//   // Methods will be added to .prototype property
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   }
 
-  greet() {
-    console.log(`Hey ${this.firstName}`);
-  }
+//   greet() {
+//     console.log(`Hey ${this.firstName}`);
+//   }
 
-  // Classes also have getters and setters
-  get age() {
-    return 2037 - this.birthYear;
-  }
+//   // Classes also have getters and setters
+//   get age() {
+//     return 2037 - this.birthYear;
+//   }
 
-  set fullName(name) {
-    console.log(name);
-    if (name.includes(' ')) {
-      this._fullName = name;
-    } else {
-      alert(`${name} is not a full name.`);
-    }
-  }
+//   set fullName(name) {
+//     console.log(name);
+//     if (name.includes(' ')) {
+//       this._fullName = name;
+//     } else {
+//       alert(`${name} is not a full name.`);
+//     }
+//   }
 
-  get fullName() {
-    return this._fullName;
-  }
+//   get fullName() {
+//     return this._fullName;
+//   }
 
-  // 215. Static Methods
-  static hey() {
-    console.log('Hey there!');
-    console.log(this);
-  }
-}
+//   // 215. Static Methods
+//   static hey() {
+//     console.log('Hey there!');
+//     console.log(this);
+//   }
+// }
 
-const jessica = new PersonCl('Jessica Davis', 1996);
-console.log(jessica);
-jessica.calcAge();
-console.log(jessica.age);
+// const jessica = new PersonCl('Jessica Davis', 1996);
+// console.log(jessica);
+// jessica.calcAge();
+// console.log(jessica.age);
 
-console.log(jessica.__proto__ === PersonCl.prototype);
+// console.log(jessica.__proto__ === PersonCl.prototype);
 
-// PersonCl.prototype.greet = function () {
-//   console.log(`Hey ${this.firstName}`);
+// // PersonCl.prototype.greet = function () {
+// //   console.log(`Hey ${this.firstName}`);
+// // };
+
+// jessica.greet();
+
+// // 1. Classes are NOT hoisted
+// // 2. Classes are first-class citizens (we can pass them into functions and return them)
+// // 3. Classes are executed in strict mode (always)
+
+// // 214. Setters and Getters
+
+// const walter = new PersonCl('Walter White', 1965);
+
+// const account = {
+//   owner: 'Jonas',
+//   movements: [200, 530, 120, 300],
+
+//   get latest() {
+//     return this.movements.slice(-1).pop();
+//   },
+
+//   set latest(mov) {
+//     this.movements.push(mov);
+//   },
 // };
 
-jessica.greet();
+// console.log(account.latest);
 
-// 1. Classes are NOT hoisted
-// 2. Classes are first-class citizens (we can pass them into functions and return them)
-// 3. Classes are executed in strict mode (always)
+// account.latest = 50;
+// console.log(account.movements);
 
-// 214. Setters and Getters
-
-const walter = new PersonCl('Walter White', 1965);
-
-const account = {
-  owner: 'Jonas',
-  movements: [200, 530, 120, 300],
-
-  get latest() {
-    return this.movements.slice(-1).pop();
+// 216. Object.create
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
   },
 
-  set latest(mov) {
-    this.movements.push(mov);
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
   },
-};
+}
 
-console.log(account.latest);
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = 'Steven';
+steven.birthYear = 2002;
+steven.calcAge();
 
-account.latest = 50;
-console.log(account.movements);
+console.log(steven.__proto__);
+
+const sara = Object.create(PersonProto);
+sara.init('Sara', 1979);
+sara.calcAge();
