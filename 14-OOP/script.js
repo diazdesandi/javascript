@@ -335,41 +335,103 @@ GOOD LUCK 😀
 */
 
 // 1.
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
-const EV = function (make, speed, charge) {
-  Car.call(this, make, speed);
-  this.charge = charge;
-};
+// const EV = function (make, speed, charge) {
+//   Car.call(this, make, speed);
+//   this.charge = charge;
+// };
 
-// Linking prototypes
-EV.prototype = Object.create(Car.prototype);
+// // Linking prototypes
+// EV.prototype = Object.create(Car.prototype);
 
-// 2.
-EV.prototype.chargeBattery = function (chargeTo) {
-  this.charge = chargeTo;
+// // 2.
+// EV.prototype.chargeBattery = function (chargeTo) {
+//   this.charge = chargeTo;
+// }
+
+// // 3.
+// EV.prototype.accelerate = function () {
+//   this.speed += 20;
+//   this.charge -= 1;
+//   console.log(`${this.make} is going at ${this.speed} km/h, with a charge of ${this.charge}%`);
+// }
+
+// EV.prototype.brake = function () {
+//   this.speed -= 5;
+//   console.log(`${this.make} is going at ${this.speed} km/h, with a charge of ${this.charge}%`);
+// }
+
+// // 4.
+// const tesla = new EV('Tesla', 120, 23);
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.accelerate();
+// tesla.brake();
+// tesla.chargeBattery(40);
+// console.log(tesla.charge);
+
+
+// 220. Inheritance Between "Classes": ES6 Classes
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  set fullName(name) {
+    console.log(name);
+    if (name.includes(' ')) {
+      this._fullName = name;
+    } else {
+      alert(`${name} is not a full name.`);
+    }
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  static hey() {
+    console.log('Hey there!');
+    console.log(this);
+  }
 }
 
-// 3.
-EV.prototype.accelerate = function () {
-  this.speed += 20;
-  this.charge -= 1;
-  console.log(`${this.make} is going at ${this.speed} km/h, with a charge of ${this.charge}%`);
+// Make a new class called Student that inherits from Person.
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    // Always call the parent constructor first.
+    // Creates the this keyword.
+    super(fullName, birthYear); // Constructor of the parent class.
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`Hi, my name is ${this.fullName} and I'm a ${this.course} student.`);
+  }
+
+  // Overriding the parent method.
+  calcAge() {
+    console.log(`I'm ${2037 - this.birthYear} years old, but as a student I feel more like ${2037 - this.birthYear + 10}`);
+  }
 }
 
-EV.prototype.brake = function () {
-  this.speed -= 5;
-  console.log(`${this.make} is going at ${this.speed} km/h, with a charge of ${this.charge}%`);
-}
-
-// 4.
-const tesla = new EV('Tesla', 120, 23);
-tesla.accelerate();
-tesla.accelerate();
-tesla.accelerate();
-tesla.brake();
-tesla.chargeBattery(40);
-console.log(tesla.charge);
+const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
+martha.introduce();
+martha.calcAge();
